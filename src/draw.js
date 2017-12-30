@@ -36,11 +36,14 @@ const drawSnake = function(snake) {
   paintHead(snake.getHead());
 }
 
-const drawFood = function(food) {
-  paintCell(food, "food");
+const updateScore = function(newScore) {
+  let scoreBoard = document.getElementById("hidden_tail");
+  scoreBoard.innerText = `your Score : ${newScore}`;
 }
 
-const updateScore = (newScore) => {
-  let scoreBoard = document.getElementById("scoreBoard");
-  scoreBoard.innerText=newScore;
+const drawFood = function(food) {
+  if (food.isSuperFood())
+    paintCell(food.getPosition(), "super-food");
+  else
+    paintCell(food.getPosition(), "food");
 }

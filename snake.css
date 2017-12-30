@@ -24,3 +24,14 @@
   background-color: blue;
   border-radius: 50%;
 }
+
+.super-food {
+  background-color: green;
+  border-radius: 50%;
+}
+
+#hidden_tail {
+  text-align: center;
+  font-size: 40px;
+  font-weight: 100;
+}
