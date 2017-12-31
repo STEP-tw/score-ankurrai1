@@ -43,6 +43,10 @@ Position.prototype.getCoord=function() {
   return [this.x,this.y];
 }
 
+Position.prototype.anyAreAtSameCoord=function (other) {
+  return this.x==other.x || this.y==other.y;
+};
+
 const generateRandomPosition=function(maxX,maxY) {
   let x=generateRandomNumberBetween(0,maxX);
   let y=generateRandomNumberBetween(0,maxY);

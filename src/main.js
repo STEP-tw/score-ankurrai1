@@ -1,5 +1,4 @@
 let game = undefined;
-let food = undefined;
 let incrimentInScore = 10;
 let numberOfRows = 60;
 let numberOfCols = 120;
@@ -7,6 +6,7 @@ let numberOfCols = 120;
 let animator = undefined;
 
 const animateSnake = function() {
+  if (game.isGameOver()) return stopGame();
   let details = game.move();
   paintBody(details.oldHead);
   unpaintSnake(details.oldTail);
@@ -47,19 +47,21 @@ const createSnake = function() {
   body.push(tail);
   body.push(tail.next());
   let head = tail.next().next();
-
-  snake = new Snake(head, body);
+  let snake = new Snake(head, body);
   game.addSnake(snake);
-}
-
-const createFood = function(numberOfRows, numberOfCols) {
-  food = generateRandomPosition(numberOfCols, numberOfRows);
 }
 
 const createGame = function() {
   let topLeft = new Position(0, 0, "east");
   let bottomRight = new Position(numberOfCols, numberOfRows, "east");
   game = new Game(topLeft, bottomRight);
+}
+
+const restart = () => location.reload();
+
+const stopGame =function () {
+  clearInterval(animator);
+  displayGameOver();
 }
 
 const startGame = function() {

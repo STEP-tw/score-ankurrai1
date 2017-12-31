@@ -1,29 +1,36 @@
-const Snake=function(head,body) {
-  this.head=head;
-  this.body=body;
+const Snake = function(head, body) {
+  this.head = head;
+  this.body = body;
 }
 
-Snake.prototype={
-  getBody:function() {
+Snake.prototype = {
+  getBody: function() {
     return this.body;
   },
-  getHead:function() {
+  getHead: function() {
     return this.head;
   },
-  move:function() {
+  move: function() {
     this.body.push(this.head);
-    this.head=this.head.next();
+    this.head = this.head.next();
     return this.body.shift();
   },
-  grow:function(growthFactor) {
+  grow: function(growthFactor) {
     for (var i = 0; i < growthFactor; i++) {
-      this.body.unshift(new Position(Infinity,Infinity,this.direction));
+      this.body.unshift(new Position(Infinity, Infinity, this.direction));
     }
   },
-  turnLeft:function() {
-    this.head=this.head.turnLeft();
+  isColliedItSelf: function() {
+    let snakeHead = this.head;
+    return this.body.some((bodyPart) => snakeHead.isSameCoordAs(bodyPart));
   },
-  turnRight:function() {
-    this.head=this.head.turnRight();
+  turnLeft: function() {
+    this.head = this.head.turnLeft();
+  },
+  turnRight: function() {
+    this.head = this.head.turnRight();
+  },
+  isWithinRange: function(topLeft, bottomRight) {
+    return this.head.anyAreAtSameCoord(topLeft) || this.head.anyAreAtSameCoord(bottomRight);
   }
 }
